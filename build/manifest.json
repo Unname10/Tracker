@@ -1,0 +1,19 @@
+{
+    "name": "Tracker",
+    "description": "Theo dõi thời gian truy cập từng trang web của bạn!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["storage", "tabs", "unlimitedStorage"],
+    "icons": {
+        "16": "/logo/logo_16.png",
+        "32": "/logo/logo_32.png",
+        "48": "/logo/logo_48.png",
+        "128": "/logo/logo_128.png"
+    },
+    "action": {
+        "default_popup": "./popup/popup.html"
+    }
+}
