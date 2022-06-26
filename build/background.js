@@ -75,6 +75,13 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     }
 });
 
-chrome.action.onClicked.addListener(async () => {
-    await checkAndStoreSession();
+//@ Kết nối với popup để theo dõi sự kiện mở/đóng
+chrome.runtime.onConnect.addListener(async function (port) {
+    if (port.name === 'popup') {
+        await checkAndStoreSession();
+        chrome.runtime.sendMessage({ status: 'Success' });
+        port.onDisconnect.addListener(function () {
+            console.log('Popup has been closed');
+        });
+    }
 });

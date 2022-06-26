@@ -1,5 +1,6 @@
 import AccessTimeChart from '~/components/AccessTimeChart';
 import QuickReport from '~/components/QuickReport';
+import Footer from '~/components/Footer';
 import classNames from 'classnames/bind';
 import styles from './Body.module.scss';
 
@@ -10,6 +11,7 @@ function Body() {
         <div className={cx('body')}>
             <AccessTimeChart />
             <QuickReport />
+            <Footer />
         </div>
     );
 }
