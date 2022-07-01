@@ -13,9 +13,6 @@ const storageData = {
     'www.chartjs.org': 4012,
 };
 
-console.log('Keys: ', Object.keys(storageData));
-console.log('Values: ', Object.values(storageData));
-
 const data = {
     labels: Object.keys(storageData),
     datasets: [
