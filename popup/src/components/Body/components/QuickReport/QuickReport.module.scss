@@ -1,4 +1,4 @@
-.quickreport {
+.quickReport {
     display: flex;
     align-items: center;
 }
@@ -51,5 +51,18 @@
     display: inline-block;
     height: 85px;
     width: 100%;
-    border-radius: 15px;
+    border-radius: 10px;
+}
+
+.slideshow-right {
+    width: 200px;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.slideshow-heading,
+.slideshow-content {
+    color: #fff;
 }
