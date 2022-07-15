@@ -1,5 +1,3 @@
-let tabActiveId;
-let windowActiveId;
 let pageAccessTime;
 let pageLeaveTime;
 let url;
@@ -46,42 +44,11 @@ async function startSession() {
     }
 }
 
-//@ Sự kiện thay đổi tabs
-chrome.tabs.onActivated.addListener(async (tabInfo) => {
-    tabActiveId = tabInfo.tabId;
-    await checkAndStoreSession();
-    await startSession();
-});
-
-//@ Sự kiện thay đổi window
-chrome.windows.onFocusChanged.addListener(async (windowId) => {
-    await checkAndStoreSession();
-    if (windowId !== -1) {
-        windowActiveId = windowId;
-        await startSession();
+chrome.runtime.onMessage.addListener((msg) => {
+    if (msg === 'startRecord') {
+        startSession();
     }
-});
-
-//@ Sự kiện thay đổi url
-chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
-    if (
-        tabId === tabActiveId &&
-        tab.windowId === windowActiveId &&
-        changeInfo.status === 'complete' &&
-        tab.url !== url
-    ) {
-        await checkAndStoreSession();
-        await startSession();
-    }
-});
-
-//@ Kết nối với popup để theo dõi sự kiện mở/đóng
-chrome.runtime.onConnect.addListener(async function (port) {
-    if (port.name === 'popup') {
-        await checkAndStoreSession();
-        chrome.runtime.sendMessage({ status: 'Success' });
-        port.onDisconnect.addListener(function () {
-            console.log('Popup has been closed');
-        });
+    if (msg === 'stopRecord') {
+        checkAndStoreSession();
     }
 });
