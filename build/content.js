@@ -1,26 +1,27 @@
-const startRecord = () => {
-    try {
-        chrome.runtime.sendMessage('startRecord');
-    } catch (e) {}
-};
+let pageAccessTime;
+
 const stopRecord = () => {
     try {
-        chrome.runtime.sendMessage('stopRecord');
+        chrome.runtime.sendMessage({
+            action: 'storeRecord',
+            pageAccessTime,
+            hostname: window.location.hostname,
+        });
     } catch (e) {}
 };
+
 window.addEventListener('load', () => {
     if (!document.hidden) {
-        startRecord();
+        // startRecord();
+        pageAccessTime = new Date();
     }
+});
+window.addEventListener('focus', () => {
+    pageAccessTime = new Date();
 });
 window.addEventListener('blur', () => {
     stopRecord();
 });
-window.addEventListener('focus', () => {
-    startRecord();
-});
 window.addEventListener('beforeunload', function (e) {
-    e.preventDefault();
-    e.returnValue = '';
     stopRecord();
 });
