@@ -15,6 +15,5 @@ async function checkAndStoreSession(pageAccessTime, hostname) {
 chrome.runtime.onMessage.addListener((msg) => {
     if (msg.action === 'storeRecord') {
         checkAndStoreSession(msg.pageAccessTime, msg.hostname);
-        console.log('Stop record at ', new Date());
     }
 });
