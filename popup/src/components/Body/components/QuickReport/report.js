@@ -3,81 +3,58 @@ import {
     getAllDateInCurrentWeek,
     getAllDateInCurrentMonth,
     findSum,
-    timeFormatForHuman,
-} from './date';
+    longTimeFormat,
+} from '~/module/date';
 
 //@ Lấy dữ liệu của ngày hiện tại
 const data = {
-    '2022-7-1': {
-        'codepen.io': 53849,
-        'developer.mozilla.org': 3549,
-        'fullstack.edu.vn': 101347,
-        'github.com': 16678,
-        localhost: 624892,
-        'tinloof.com': 106244,
-        'www.google.com': 15145,
-        'www.w3schools.com': 12061,
-        'www.youtube.com': 13375,
+    '2022-7-16': {
+        'accounts.google.com': 1570,
+        'accounts.pixiv.net': 1208,
+        'getcssscan.com': 40274,
+        'github.com': 89632,
+        localhost: 63571,
+        'login.live.com': 15054,
+        'nodejs.vn': 12437,
+        'office.live.com': 7030,
+        'onedrive.live.com': 177539,
+        'vi.wikipedia.org': 2006,
+        'viblo.asia': 53116,
+        'www.dropbox.com': 21958,
+        'www.geeksforgeeks.org': 26459,
+        'www.google.com': 11562,
+        'www.microsoft.com': 19767,
+        'www.pixiv.net': 95487,
+        'www.timecalculator.net': 82272,
+        'www.w3schools.com': 35491,
+        'www.youtube.com': 1265236,
     },
-    '2022-7-2': {
-        'blogchiasekienthuc.com': 24103,
-        'codepen.io': 3515,
-        'drive.google.com': 5440,
-        'quantrimang.com': 3854,
-        'www.youtube.com': 25235,
+    '2022-7-17': {
+        'getcssscan.com': 50874,
+        localhost: 208734,
+        'www.timecalculator.net': 27842,
+        'www.youtube.com': 335276,
     },
-    '2022-7-3': {
-        'codepen.io': 648,
-        'cssgradient.io': 128169,
-        'fonts.google.com': 63672,
-        'fullstack.edu.vn': 59051,
-        localhost: 278547,
-        'translate.google.com': 13910,
-        'www.google.com': 2755,
-        'www.w3schools.com': 83858,
-        'www.youtube.com': 64177,
-    },
-    '2022-7-5': {
-        'bobbyhadz.com': 11392,
-        'codepen.io': 1673,
-        'cssgradient.io': 5778,
-        'developer.mozilla.org': 37269,
-        'ed.ted.com': 1527,
-        'fonts.google.com': 9942,
-        localhost: 99937,
-        'quantrimang.com': 18168,
-        'stackoverflow.com': 1173,
-        'tinloof.com': 1725,
-        'translate.google.com': 38033,
-        'www.geeksforgeeks.org': 30880,
-        'www.w3schools.com': 1663,
-        'www.youtube.com': 42099,
-    },
-    '2022-7-6': {
-        'developer.mozilla.org': 82506,
-        localhost: 115862,
-        'stackoverflow.com': 35635,
-        'www.geeksforgeeks.org': 1938,
-        'www.youtube.com': 22694,
-    },
+    usageTime: 2644000,
+    usageDate: 2,
 };
 const date = formatDateObj(new Date());
 const dateInWeek = getAllDateInCurrentWeek();
 const dateInMonth = getAllDateInCurrentMonth();
 
-const timeUsedToday = timeFormatForHuman(findSum(data[date]));
-const timeUsedInWeek = timeFormatForHuman(
+const timeUsedToday = longTimeFormat(findSum(data[date]));
+const timeUsedInWeek = longTimeFormat(
     dateInWeek.reduce((sum, date) => {
         return sum + findSum(data[date]);
     }, 0)
 );
-const timeUsedInMonth = timeFormatForHuman(
+const timeUsedInMonth = longTimeFormat(
     dateInMonth.reduce((sum, date) => {
         return sum + findSum(data[date]);
     }, 0)
 );
-const averageUsageTimePerDay = timeFormatForHuman(
-    Math.floor(timeUsedInMonth / dateInMonth.length)
+const averageUsageTimePerDay = longTimeFormat(
+    Math.floor(data.usageTime / data.usageDate)
 );
 
 const reportContent = [

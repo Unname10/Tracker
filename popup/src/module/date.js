@@ -12,7 +12,9 @@ const getAllDateInCurrentWeek = () => {
     let current = new Date();
 
     //@ Bắt đầu bằng thứ hai
-    current.setDate(current.getDate() - current.getDay() + 1);
+    current.setDate(
+        current.getDate() - (current.getDay() - 1 < 0 ? 6 : current.getDay() - 1)
+    );
     while (current.getDate() <= new Date().getDate()) {
         week.push(formatDateObj(current));
         current.setDate(current.getDate() + 1); //@ Tăng một ngày
@@ -34,7 +36,7 @@ const formatDateObj = (dateObj) => {
     return `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()}`;
 };
 
-const timeFormatForHuman = (date) => {
+const longTimeFormat = (date) => {
     let seconds = Math.floor(date / 1000) % 60; // 1000 mili giây bằng 1 giây
     let minutes = Math.floor(date / 60000) % 60; // 60000 mili giây bằng 1 phút
     let hours = Math.floor(date / 3600000) % 24; // 3600000 mili giây bằng 1 giờ;
@@ -58,10 +60,27 @@ const timeFormatForHuman = (date) => {
     return result;
 };
 
+const shortTimeFormat = (time) => {
+    let resultConvert = '';
+    let minutes = Math.floor(time / 60000) % 60; // 60000 mili giây bằng 1 phút
+    let hours = Math.floor(time / 3600000) % 24; // 3600000 mili giây bằng 1 giờ;
+    if (minutes > 0) {
+        resultConvert = `${minutes}'`;
+    }
+    if (hours > 0) {
+        resultConvert = `${hours}h${resultConvert ? resultConvert : ''}`;
+    }
+    if (!resultConvert) {
+        resultConvert = "0'";
+    }
+    return resultConvert;
+};
+
 export {
     findSum,
     getAllDateInCurrentWeek,
     getAllDateInCurrentMonth,
     formatDateObj,
-    timeFormatForHuman,
+    longTimeFormat,
+    shortTimeFormat,
 };

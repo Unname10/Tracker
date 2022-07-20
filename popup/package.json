@@ -12,7 +12,6 @@
         "@tippyjs/react": "^4.2.6",
         "chart.js": "^3.8.0",
         "classnames": "^2.3.1",
-        "d3": "^7.4.4",
         "normalize.css": "^8.0.1",
         "react": "^18.2.0",
         "react-chartjs-2": "^4.2.0",
