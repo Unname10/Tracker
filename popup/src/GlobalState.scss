@@ -5,10 +5,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 body {
     font-family: 'Source Sans Pro', sans-serif;
     width: 475px;
     height: 600px;
+}
+
+.App {
+    transition: background-color 0.3s ease;
 }

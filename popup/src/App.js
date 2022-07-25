@@ -1,26 +1,21 @@
+import { useContext } from 'react';
 import Header from '~/components/Header';
 import Body from '~/components/Body';
-// import Footer from '~/components/Footer';
-
-function storeSessionAndGetStorage() {
-    chrome.runtime.connect({ name: 'popup' });
-    chrome.runtime.onMessage.addListener((message) => {
-        if (message.status === 'Success') {
-            let storage = chrome.storage.local.get();
-            storage.then((data) => {
-                return data;
-            });
-        }
-    });
-}
+import ThemeContext from '~/store/ThemeContext/ThemeContext';
+import '~/GlobalState.scss';
 
 function App() {
-    // let storage = storeSessionAndGetStorage();
+    const { theme } = useContext(ThemeContext);
+
     return (
-        <div className="App">
+        <div
+            className="App"
+            style={{
+                backgroundColor: theme === 'dark' ? '#181818' : '#fff',
+            }}
+        >
             <Header />
             <Body />
-            {/* <Footer /> */}
         </div>
     );
 }

@@ -1,0 +1,136 @@
+:root {
+    --primary-color: #2e2e2e;
+    --secondary-color: rgb(94, 94, 94);
+    --btn-bg-color: rgba(36, 14, 14, 0.2);
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.wrapper.dark {
+    --primary-color: #f0f0f0;
+    --secondary-color: rgb(200, 200, 200);
+    --btn-bg-color: rgba(130, 130, 130, 0.2);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .header-title {
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--primary-color);
+    }
+    .btn {
+        background-color: transparent;
+        border: 0;
+        width: 35px;
+        height: 35px;
+        margin: 0 15px;
+        border-radius: 40px;
+        transition: background-color 0.2s ease-in;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+            background-color: var(--btn-bg-color);
+        }
+        .icons {
+            font-size: 17px;
+            color: var(--primary-color);
+        }
+    }
+    .btn:disabled {
+        cursor: default;
+        .icons {
+            color: var(--secondary-color);
+        }
+        &:hover {
+            background-color: transparent;
+        }
+    }
+}
+
+.content {
+    width: 100%;
+    height: 215px;
+    overflow-y: scroll;
+    padding: 0 10px;
+    margin-top: 5px;
+    color: var(--primary-color);
+    .pagesVisitedList {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .pages {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 30px;
+            .pages-report {
+                display: flex;
+                justify-content: space-between;
+                width: 400px;
+                .pages-info {
+                    display: flex;
+                    align-items: center;
+                    width: 320px;
+                    height: 100%;
+                    .pages-title {
+                        font-size: 15px;
+                        padding-left: 10px;
+                    }
+                }
+                .pages-usage-time {
+                    border-right: 1px solid var(--secondary-color);
+                    padding-right: 10px;
+                }
+            }
+            .view-report-btn {
+                background-color: transparent;
+                border: 0;
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+                border-radius: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                &:hover {
+                    background-color: var(--btn-bg-color);
+                }
+                .icons {
+                    color: var(--primary-color);
+                }
+            }
+        }
+    }
+    .message {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--primary-color);
+        padding: 10px 5px;
+    }
+}

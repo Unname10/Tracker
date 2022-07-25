@@ -16,7 +16,7 @@ const getAllDateInCurrentWeek = () => {
         current.getDate() - (current.getDay() - 1 < 0 ? 6 : current.getDay() - 1)
     );
     while (current.getDate() <= new Date().getDate()) {
-        week.push(formatDateObj(current));
+        week.push(shortDateFormat(current));
         current.setDate(current.getDate() + 1); //@ Tăng một ngày
     }
     return week;
@@ -26,13 +26,13 @@ const getAllDateInCurrentMonth = () => {
     let month = new Array();
     let current = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
     for (let i = 0; i < new Date().getDate(); i++) {
-        month.push(formatDateObj(current));
+        month.push(shortDateFormat(current));
         current.setDate(current.getDate() + 1);
     }
     return month;
 };
 
-const formatDateObj = (dateObj) => {
+const shortDateFormat = (dateObj) => {
     return `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()}`;
 };
 
@@ -71,16 +71,23 @@ const shortTimeFormat = (time) => {
         resultConvert = `${hours}h${resultConvert ? resultConvert : ''}`;
     }
     if (!resultConvert) {
-        resultConvert = "0'";
+        resultConvert = "<1'";
     }
     return resultConvert;
+};
+const longDateFormat = (dateObj) => {
+    const day = `${dateObj.getDay() === 0 ? 'Chủ nhật' : `Thứ ${dateObj.getDay() + 1}`}`;
+    const date = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    return `${day}, ${date} tháng ${month}`;
 };
 
 export {
     findSum,
     getAllDateInCurrentWeek,
     getAllDateInCurrentMonth,
-    formatDateObj,
     longTimeFormat,
     shortTimeFormat,
+    longDateFormat,
+    shortDateFormat,
 };

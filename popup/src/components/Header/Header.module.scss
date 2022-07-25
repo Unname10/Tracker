@@ -1,42 +1,46 @@
+:root {
+    --primary-color: #2e2e2e;
+}
+
+.header.dark {
+    --primary-color: #f0f0f0;
+}
+
 .header {
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 16px;
-}
+    .logo {
+        display: flex;
+        align-items: center;
+    }
 
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo-title {
-    font-size: 23px;
-    font-weight: 200;
-    padding: 0 20px;
-}
-
-.actions {
-    display: flex;
-    align-items: center;
-}
-
-.icons {
-    font-size: 20px;
-}
-
-.header button {
-    background-color: transparent;
-    border: 0;
-    width: 23px;
-    height: 23px;
-}
-
-.setting-icon {
-    margin-left: 7px;
-}
-
-.add-whitelist {
-    margin-right: 7px;
+    .logo-title {
+        font-size: 23px;
+        font-weight: 200;
+        padding: 0 20px;
+        color: var(--primary-color);
+    }
+    .actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 30%;
+        .btn {
+            background-color: transparent;
+            border: 0;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icons {
+            font-size: 23px;
+            color: var(--primary-color);
+        }
+    }
 }

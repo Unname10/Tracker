@@ -1,16 +1,20 @@
 import classNames from 'classnames/bind';
-import { createContext } from 'react';
 import AccessTimeChart from './components/AccessTimeChart';
-import QuickReport from './components/QuickReport';
+import PagesVisited from './components/PagesVisited';
 import styles from './Body.module.scss';
+import DataProvider from '~/store/DataContext/DataProvider';
+import DateProvider from '~/store/DateContext/DateProvider';
 
 const cx = classNames.bind(styles);
 
 function Body() {
     return (
-        <div className={cx('body')}>
-            <AccessTimeChart />
-        </div>
+        <DateProvider>
+            <div className={cx('body')}>
+                <AccessTimeChart />
+                <PagesVisited />
+            </div>
+        </DateProvider>
     );
 }
 
