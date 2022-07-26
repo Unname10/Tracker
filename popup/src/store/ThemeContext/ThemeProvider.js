@@ -1,16 +1,16 @@
 import ThemeContext from './ThemeContext';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function ThemeProvider({ children }) {
-    const [theme, setTheme] = useState('dark');
+    let defaultTheme = 'dark';
+    chrome.storage.local.get((data) => {
+        if (data.setting ? data.setting.theme : data.setting) {
+            defaultTheme = data.setting.theme;
+        }
+    });
 
-    useEffect(() => {
-        const getSettingStorage = async () => {
-            const { setting } = await chrome.storage.local.get({ setting });
-            setTheme(setting.theme ? setting.theme : 'dark');
-        };
-        getSettingStorage();
-    }, []);
+    const [theme, setTheme] = useState(defaultTheme);
+
     const values = { theme, setTheme };
 
     return <ThemeContext.Provider value={values}>{children}</ThemeContext.Provider>;

@@ -1,16 +1,12 @@
-import { useEffect } from 'react';
 import DataContext from './DataContext';
 
 function DataProvider({ children }) {
-    let storageData;
-
-    useEffect(() => {
-        const getStorageData = async () => {
-            const storage = await chrome.storage.local.get();
-            storageData = storage ? storage : { session: {}, exclusion: [] };
-        };
-        getStorageData();
-    }, []);
+    let storageData = { session: {}, exclusion: [], setting: {} };
+    chrome.storage.local.get((data) => {
+        if (Object.keys(data).length !== 0) {
+            storageData = data;
+        }
+    });
 
     return <DataContext.Provider value={storageData}>{children}</DataContext.Provider>;
 }

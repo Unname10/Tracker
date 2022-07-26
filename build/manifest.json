@@ -23,5 +23,5 @@
             "run_at": "document_start"
         }
     ],
-    "options_page": "./dashboard/general.html"
+    "options_page": "/dashboard/general.html"
 }

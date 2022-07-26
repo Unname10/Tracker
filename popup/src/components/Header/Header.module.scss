@@ -42,5 +42,13 @@
             font-size: 23px;
             color: var(--primary-color);
         }
+        .block {
+            background-color: transparent;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 }
