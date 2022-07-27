@@ -14,6 +14,7 @@ function PagesVisited() {
     const { session } = useContext(DataContext);
     const { theme } = useContext(ThemeContext);
     const { date, setDate } = useContext(DateContext);
+
     const minDate = Math.min(...Object.keys(session).map((value) => new Date(value)));
     const maxDate = Math.max(...Object.keys(session).map((value) => new Date(value)));
     const handlePrevDate = () => {

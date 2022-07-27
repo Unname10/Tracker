@@ -437,6 +437,3 @@ body {
     height: 600px;
     width: 475px;
 }
-.App {
-    transition: background-color 0.3s ease;
-}

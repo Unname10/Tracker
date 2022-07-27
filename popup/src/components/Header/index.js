@@ -9,7 +9,7 @@ import {
     faMinus,
     faExclamation,
 } from '@fortawesome/free-solid-svg-icons';
-import { useContext, useState, useLayoutEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import styles from './Header.module.scss';
@@ -23,7 +23,7 @@ function Header() {
     const { theme, setTheme } = useContext(ThemeContext);
     const { exclusion, setting } = useContext(DataContext);
     let [url, setUrl] = useState();
-    useLayoutEffect(() => {
+    useEffect(() => {
         const getCurrentTab = async () => {
             let currentTab = await chrome.tabs.query({
                 active: true,
@@ -53,7 +53,7 @@ function Header() {
             setExclusionBtn(!exclusionBtn);
         };
     }
-    const handleSetTheme = async () => {
+    const handleSetTheme = () => {
         setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
         setting.theme = theme;
         chrome.storage.local.set({ setting });
@@ -69,7 +69,7 @@ function Header() {
                 <Tippy content={theme === 'dark' ? 'Lightmode' : 'Darkmode'}>
                     <button className={cx('btn')} onClick={handleSetTheme}>
                         <FontAwesomeIcon
-                            icon={theme !== 'dark' ? faMoon : faSun}
+                            icon={theme === 'dark' ? faSun : faMoon}
                             className={cx('icons')}
                         />
                     </button>

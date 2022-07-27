@@ -12,6 +12,7 @@ function App() {
             className="App"
             style={{
                 backgroundColor: theme === 'dark' ? '#181818' : '#fff',
+                transition: 'background-color 0.3s ease',
             }}
         >
             <Header />
