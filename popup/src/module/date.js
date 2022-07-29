@@ -54,8 +54,8 @@ const longTimeFormat = (date) => {
     if (days > 0) {
         result = `${days} ngày${result === '' ? '' : `, ${result}`}`;
     }
-    if (result === '') {
-        return '0 phút';
+    if (result === '' && date === 0) {
+        result = '0 phút';
     }
     return result;
 };

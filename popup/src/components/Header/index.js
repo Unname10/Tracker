@@ -20,8 +20,9 @@ import DataContext from '~/store/DataContext/DataContext';
 const cx = classNames.bind(styles);
 
 function Header() {
-    const { theme, setTheme } = useContext(ThemeContext);
-    const { exclusion, setting } = useContext(DataContext);
+    const { theme, setAndStoreTheme } = useContext(ThemeContext);
+    const { exclusion } = useContext(DataContext);
+
     let [url, setUrl] = useState();
     useEffect(() => {
         const getCurrentTab = async () => {
@@ -33,13 +34,18 @@ function Header() {
         };
         getCurrentTab();
     }, []);
-
     const isUrlValid = url ? url.protocol.startsWith('http') : false;
-    const [exclusionBtn, setExclusionBtn] = useState(
-        url ? exclusion.includes(url.hostname) : false
-    );
-    if (url) {
-        var handleToggleWhileList = () => {
+
+    const [exclusionBtn, setExclusionBtn] = useState(false);
+    useEffect(() => {
+        if (exclusion.length !== 0) {
+            setExclusionBtn(isUrlValid ? exclusion.includes(url.hostname) : null);
+        }
+    }, [exclusion]);
+
+    let handleToggleWhileList;
+    if (isUrlValid) {
+        handleToggleWhileList = () => {
             if (exclusionBtn) {
                 const indexInExclusionList = exclusion.findIndex((value) => {
                     return value === url.hostname;
@@ -53,11 +59,6 @@ function Header() {
             setExclusionBtn(!exclusionBtn);
         };
     }
-    const handleSetTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-        setting.theme = theme;
-        chrome.storage.local.set({ setting });
-    };
 
     return (
         <div className={cx('header', theme)}>
@@ -67,7 +68,7 @@ function Header() {
             </div>
             <div className={cx('actions')}>
                 <Tippy content={theme === 'dark' ? 'Lightmode' : 'Darkmode'}>
-                    <button className={cx('btn')} onClick={handleSetTheme}>
+                    <button className={cx('btn')} onClick={setAndStoreTheme}>
                         <FontAwesomeIcon
                             icon={theme === 'dark' ? faSun : faMoon}
                             className={cx('icons')}
