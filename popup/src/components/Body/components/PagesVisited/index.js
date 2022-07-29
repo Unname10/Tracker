@@ -55,33 +55,35 @@ function PagesVisited() {
             <div className={cx('content')}>
                 <div className={cx('pagesVisitedList')}>
                     {session[date] ? (
-                        Object.keys(session[date]).map((value, index) => {
-                            const faviconUrl = `https://www.google.com/s2/favicons?sz=16&domain_url=${value}`;
-                            return (
-                                <div key={index} className={cx('pages')}>
-                                    <div className={cx('pages-report')}>
-                                        <div className={cx('pages-info')}>
-                                            <img src={faviconUrl} />
-                                            <span className={cx('pages-title')}>
-                                                {value}
+                        Object.keys(session[date])
+                            .sort((a, b) => session[date][b] - session[date][a])
+                            .map((value, index) => {
+                                const faviconUrl = `https://www.google.com/s2/favicons?sz=16&domain_url=${value}`;
+                                return (
+                                    <div key={index} className={cx('pages')}>
+                                        <div className={cx('pages-report')}>
+                                            <div className={cx('pages-info')}>
+                                                <img src={faviconUrl} />
+                                                <span className={cx('pages-title')}>
+                                                    {value}
+                                                </span>
+                                            </div>
+                                            <span className={cx('pages-usage-time')}>
+                                                {shortTimeFormat(session[date][value])}
                                             </span>
                                         </div>
-                                        <span className={cx('pages-usage-time')}>
-                                            {shortTimeFormat(session[date][value])}
-                                        </span>
+                                        <button
+                                            className={cx('view-report-btn')}
+                                            title="Xem báo cáo"
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faAngleRight}
+                                                className={cx('icons')}
+                                            />
+                                        </button>
                                     </div>
-                                    <button
-                                        className={cx('view-report-btn')}
-                                        title="Xem báo cáo"
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={faAngleRight}
-                                            className={cx('icons')}
-                                        />
-                                    </button>
-                                </div>
-                            );
-                        })
+                                );
+                            })
                     ) : (
                         <span className={cx('message')}>Không có dữ liệu</span>
                     )}
