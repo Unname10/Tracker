@@ -20,7 +20,7 @@ const cx = classNames.bind(styles);
 ChartJS.register(Tooltip, BarElement, CategoryScale, LinearScale, Title, SubTitle);
 
 function AccessTimeChart() {
-    const { session } = useContext(DataContext);
+    const { byDate } = useContext(DataContext);
     const { date } = useContext(DateContext);
     const { theme } = useContext(ThemeContext);
     const borderColor = [
@@ -76,7 +76,7 @@ function AccessTimeChart() {
                 borderColor,
                 borderWidth: 1,
                 data: week.map((value) => {
-                    return findSum(session[value]);
+                    return findSum(byDate[value]);
                 }),
             },
         ],
@@ -116,7 +116,7 @@ function AccessTimeChart() {
             },
             subtitle: {
                 display: true,
-                text: longTimeFormat(findSum(session[shortDateFormat(new Date())])),
+                text: longTimeFormat(findSum(byDate[shortDateFormat(new Date())])),
                 padding: {
                     top: 5,
                     bottom: 20,

@@ -5,16 +5,16 @@ async function checkAndStoreSession(pageAccessTime, hostname) {
         let date = `${dateObj.getFullYear()}-${
             dateObj.getMonth() + 1
         }-${dateObj.getDate()}`;
-        let { session } = await chrome.storage.local.get({ session: {} });
-        if (!session[date]) {
-            session[date] = {};
+        let { byDate } = await chrome.storage.local.get({ byDate: {} });
+        if (!byDate[date]) {
+            byDate[date] = {};
         }
-        if (!session[date][hostname]) {
-            session[date][hostname] = 0;
+        if (!byDate[date][hostname]) {
+            byDate[date][hostname] = 0;
         }
-        session[date][hostname] += dateObj - new Date(pageAccessTime);
-        if (session[date][hostname]) {
-            chrome.storage.local.set({ session });
+        byDate[date][hostname] += dateObj - new Date(pageAccessTime);
+        if (byDate[date][hostname]) {
+            chrome.storage.local.set({ byDate });
         }
     }
 }

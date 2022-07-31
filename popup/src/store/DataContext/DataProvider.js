@@ -3,7 +3,7 @@ import DataContext from './DataContext';
 
 function DataProvider({ children }) {
     const [storageData, setStorageData] = useState({
-        session: {},
+        byDate: {},
         exclusion: [],
         setting: {},
     });
@@ -12,13 +12,13 @@ function DataProvider({ children }) {
         chrome.storage.local.get((data) => {
             if (Object.keys(data).length !== 0) {
                 if (
-                    typeof data.session === 'object'
-                        ? Object.keys(data.session).length !== 0
+                    typeof data.byDate === 'object'
+                        ? Object.keys(data.byDate).length !== 0
                         : false
                 ) {
                     setStorageData((prevData) => ({
                         ...prevData,
-                        session: data.session,
+                        byDate: data.byDate,
                     }));
                 }
                 if (

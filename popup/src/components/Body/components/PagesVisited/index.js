@@ -11,12 +11,12 @@ import DateContext from '~/store/DateContext/DateContent';
 const cx = classNames.bind(styles);
 
 function PagesVisited() {
-    const { session } = useContext(DataContext);
+    const { byDate } = useContext(DataContext);
     const { theme } = useContext(ThemeContext);
     const { date, setDate } = useContext(DateContext);
 
-    const minDate = Math.min(...Object.keys(session).map((value) => new Date(value)));
-    const maxDate = Math.max(...Object.keys(session).map((value) => new Date(value)));
+    const minDate = Math.min(...Object.keys(byDate).map((value) => new Date(value)));
+    const maxDate = Math.max(...Object.keys(byDate).map((value) => new Date(value)));
     const handlePrevDate = () => {
         setDate((prevDate) => {
             const dateObj = new Date(prevDate);
@@ -54,9 +54,9 @@ function PagesVisited() {
             </div>
             <div className={cx('content')}>
                 <div className={cx('pagesVisitedList')}>
-                    {session[date] ? (
-                        Object.keys(session[date])
-                            .sort((a, b) => session[date][b] - session[date][a])
+                    {byDate[date] ? (
+                        Object.keys(byDate[date])
+                            .sort((a, b) => byDate[date][b] - byDate[date][a])
                             .map((value, index) => {
                                 const faviconUrl = `https://www.google.com/s2/favicons?sz=16&domain_url=${value}`;
                                 return (
@@ -69,7 +69,7 @@ function PagesVisited() {
                                                 </span>
                                             </div>
                                             <span className={cx('pages-usage-time')}>
-                                                {shortTimeFormat(session[date][value])}
+                                                {shortTimeFormat(byDate[date][value])}
                                             </span>
                                         </div>
                                         <button

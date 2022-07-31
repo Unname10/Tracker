@@ -1,0 +1,23 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;1,100;1,300&display=swap');
+
+:root {
+    // Dark theme color
+    --dark-background-color: #010409;
+    --dark-primary-color: #f0f0f0;
+
+    //Light theme color
+    --light-background-color: #f6f8fa;
+    --light-primary-color: #2e2e2e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+}
